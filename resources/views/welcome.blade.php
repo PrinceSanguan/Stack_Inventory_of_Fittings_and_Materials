@@ -15,13 +15,14 @@
 
         <h1>Inventory System</h1>
   
-      <form action="" method="POST" class="form login">
+      <form action="{{route('login.form')}}" method="post" class="form login">
+        @csrf
   
         <div class="form__field">
           <label for="login__username"><svg class="icon">
               <use xlink:href="#icon-user"></use>
-            </svg><span class="hidden">Username</span></label>
-          <input autocomplete="username" id="login__username" type="text" name="username" class="form__input" placeholder="Username" required>
+            </svg><span class="hidden">Email</span></label>
+          <input autocomplete="username" id="login__username" type="email" name="email" class="form__input" placeholder="Email" required>
         </div>
   
         <div class="form__field">
@@ -32,14 +33,14 @@
         </div>
   
         <div class="form__field">
-          <input type="submit" value="Sign In">
+          <input type="submit" value="Submit">
         </div>
   
       </form>
   
-      <p class="text--center">Not a member? <a href="#">Sign up now</a> <svg class="icon">
+{{--       <p class="text--center">Not a member? <a href="#">Sign up now</a> <svg class="icon">
           <use xlink:href="#icon-arrow-right"></use>
-        </svg></p>
+        </svg></p> --}}
   
     </div>
   
@@ -56,5 +57,28 @@
     </svg>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    @if (session('success'))
+      Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: '{{ session('success') }}',
+        confirmButtonText: 'OK'
+      });
+    @endif
+
+    @if (session('error'))
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: '{{ session('error') }}',
+        confirmButtonText: 'Try Again'
+      });
+    @endif
+  });
+</script>
 </body>
 </html> 
