@@ -6,11 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>SIJM DASHBOARD</title>
 
-  <!-------------------------------This is admin lte -------------------------------->
+  <!------------------------------- AdminLTE (Bootstrap 4) -------------------------------->
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Tempusdominus Bootstrap 4 -->
@@ -25,8 +23,15 @@
   <link rel="stylesheet" href="{{asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css')}}">
-  <!-- summernote -->
+  <!-- Summernote -->
   <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
+
+  <!-- Font Awesome (for icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+
 </head>
   <!-------------------------------This is admin lte -------------------------------->
 
@@ -35,7 +40,7 @@
   
       <!-- Preloader -->
       <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__shake" src="" alt="SIJM" height="60" width="60">
+        <img class="animation__shake" src="{{asset('images/sijm.jpg')}}" alt="SIJM" height="150" width="150">
       </div>
     
       <!-- Navbar -->

@@ -11,10 +11,15 @@
 
 <body class="align" style="background-color: bisque">
 
+
     <div class="grid">
 
-        <h1>Inventory System</h1>
+        <!-- Company Image -->
+        <div class="text-center mb-4">
+          <img src="{{asset('images/sijm.jpg')}}" alt="Company Logo" class="img-fluid" style="max-width: 200px;">
+        </div>
   
+        <h1>Inventory System</h1>
       <form action="{{route('login.form')}}" method="post" class="form login">
         @csrf
   
@@ -37,10 +42,6 @@
         </div>
   
       </form>
-  
-{{--       <p class="text--center">Not a member? <a href="#">Sign up now</a> <svg class="icon">
-          <use xlink:href="#icon-arrow-right"></use>
-        </svg></p> --}}
   
     </div>
   
