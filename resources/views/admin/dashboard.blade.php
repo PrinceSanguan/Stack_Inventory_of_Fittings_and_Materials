@@ -17,7 +17,7 @@
 </style>
 
             <div class="col-sm-6 col-lg-12">
-                <h1 class="m-0">Dashboard</h1>
+                <h1 class="m-0">All Category Inventory</h1>
 
                 <!-- Print Button -->
                 <button id="printTable" class="btn btn-primary mb-3">Print Table</button>

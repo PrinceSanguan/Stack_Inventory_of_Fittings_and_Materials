@@ -29,12 +29,22 @@ Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.d
 Route::post('/admin/dashboard', [AdminController::class, 'updateCategory'])->name('admin.update-category');
 Route::delete('/admin/dashboard/delete/{id}', [AdminController::class, 'deleteCategory'])->name('admin.delete-category');
 
-Route::get('/admin/record-day', [AdminController::class, 'recordDay'])->name('admin.record-day');
-Route::get('/admin/record-week', [AdminController::class, 'recordWeek'])->name('admin.record-week');
-Route::get('/admin/record-month', [AdminController::class, 'recordMonth'])->name('admin.record-month');
-
 Route::get('/admin/category', [AdminController::class, 'category'])->name('admin.category');
 Route::post('/admin/category', [AdminController::class, 'addCategory'])->name('admin.add-category');
+
+Route::get('/admin/connection', [AdminController::class, 'connection'])->name('admin.connection');
+
+Route::get('/admin/repair', [AdminController::class, 'repair'])->name('admin.repair');
+
+Route::get('/admin/subsidy', [AdminController::class, 'subsidy'])->name('admin.subsidy');
+
+Route::get('/admin/donation', [AdminController::class, 'donation'])->name('admin.donation');
+
+Route::get('/admin/maintenance', [AdminController::class, 'maintenance'])->name('admin.maintenance');
+
+Route::get('/admin/mswd', [AdminController::class, 'mswd'])->name('admin.mswd');
+
+Route::get('/admin/accountable', [AdminController::class, 'accountable'])->name('admin.accountable');
 });
 
 

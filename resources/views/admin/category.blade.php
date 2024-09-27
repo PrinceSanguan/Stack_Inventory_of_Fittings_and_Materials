@@ -8,11 +8,26 @@
         <div class="col-sm-12 col-lg-12">
           <!-- Content Here -->
 
-          <h1 class="m-0">Category</h1>
+          <h1 class="m-0">Add Item</h1>
 
           <!-- Category Form -->
           <form action="{{route('admin.add-category')}}" method="post" class="mt-4">
             @csrf
+
+            <div class="form-group">
+              <label>Select Category</label>
+              <select name="category" class="form-control" required>
+                  <option value="" disabled selected>Select Category</option>
+                  <option value="connection">For Service Connection</option>
+                  <option value="repair">For Repair and Maintenance</option>
+                  <option value="subsidy">30M NG Subsidy Project</option>
+                  <option value="donation">Donation</option>
+                  <option value="maintenance">Gen. Set</option>
+                  <option value="mswd">MSWD Inventory</option>
+                  <option value="accountable">Accountable Forms</option>
+              </select>
+            </div>
+
             <div class="form-group">
               <label>Reorder Point</label>
               <input type="text" name="reorder" class="form-control" placeholder="Enter Reorder Point" required>
