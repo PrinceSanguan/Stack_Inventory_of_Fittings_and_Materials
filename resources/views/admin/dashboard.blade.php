@@ -227,10 +227,13 @@ $(document).ready(function() {
 
 <script>
     document.getElementById('printTable').addEventListener('click', function() {
-        var printContents = document.getElementById('inventoryTable').outerHTML;
+        var title = document.querySelector('h1').outerHTML; // Get the H1 title
+        var table = document.getElementById('inventoryTable').outerHTML; // Get the table HTML
+        var printContents = title + table; // Combine the title and table
+  
         var originalContents = document.body.innerHTML;
     
-        // Replace the body content with the table for printing
+        // Replace the body content with the title and table for printing
         document.body.innerHTML = printContents;
     
         window.print();
@@ -239,7 +242,7 @@ $(document).ready(function() {
         document.body.innerHTML = originalContents;
         window.location.reload(); // Optional: Reload the page to restore the state
     });
-</script>
+  </script>
 
 <script>
     $(document).ready(function() {
