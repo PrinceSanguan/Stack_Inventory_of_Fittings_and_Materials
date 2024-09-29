@@ -27,7 +27,10 @@ Route::middleware(['auth'])->group(function () {
 /// Admin Contoller ///
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 Route::post('/admin/dashboard', [AdminController::class, 'updateCategory'])->name('admin.update-category');
-Route::delete('/admin/dashboard/delete/{id}', [AdminController::class, 'deleteCategory'])->name('admin.delete-category');
+Route::delete('/admin/dashboard/delete/{id}/{category}', [AdminController::class, 'deleteCategory'])->name('admin.delete-category');
+
+Route::get('/admin/purchase', [AdminController::class, 'purchase'])->name('admin.purchase');
+Route::post('/admin/purchase', [AdminController::class, 'addPurchase'])->name('admin.add-purchase');
 
 Route::get('/admin/category', [AdminController::class, 'category'])->name('admin.category');
 Route::post('/admin/category', [AdminController::class, 'addCategory'])->name('admin.add-category');
@@ -45,6 +48,8 @@ Route::get('/admin/maintenance', [AdminController::class, 'maintenance'])->name(
 Route::get('/admin/mswd', [AdminController::class, 'mswd'])->name('admin.mswd');
 
 Route::get('/admin/accountable', [AdminController::class, 'accountable'])->name('admin.accountable');
+
+Route::get('/admin/purchase-history', [AdminController::class, 'purchaseHistory'])->name('admin.purchase-history');
 });
 
 

@@ -8,10 +8,10 @@
         <div class="col-sm-12 col-lg-12">
           <!-- Content Here -->
 
-          <h1 class="m-0">Add Item</h1>
+          <h1 class="m-0">Purchase Order</h1>
 
           <!-- Category Form -->
-          <form action="{{route('admin.add-category')}}" method="post" class="mt-4">
+          <form action="{{route('admin.add-purchase')}}" method="post" class="mt-4">
             @csrf
 
             <div class="form-group">

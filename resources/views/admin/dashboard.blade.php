@@ -54,6 +54,7 @@
                                     <div class="d-flex">
                                         <button type="button" class="btn btn-success btn-sm flex-grow-1 me-2" 
                                                 data-id="{{$inventory->id}}"
+                                                data-category="{{$inventory->category}}"
                                                 data-reorder="{{$inventory->reorder}}"
                                                 data-inventory="{{$inventory->inventory}}"
                                                 data-description="{{$inventory->description}}"
@@ -67,8 +68,10 @@
                                                 data-bs-target="#editModal">
                                             <i class="fa-solid fa-pen"></i> Edit
                                         </button>
-                                        <button type="button" class="btn btn-danger btn-sm flex-grow-1 delete-button" data-id="{{$inventory->id}}">
-                                            <i class="fa-solid fa-trash"></i> Delete
+                                        <button type="button" class="btn btn-danger btn-sm flex-grow-1 delete-button" 
+                                                data-id="{{$inventory->id}}"
+                                                data-category="{{$inventory->category}}">
+                                                <i class="fa-solid fa-trash"></i> Delete
                                         </button>
                                     </div>
                                 </td>
@@ -108,6 +111,7 @@
               <form id="editForm" method="post" action="{{route('admin.update-category')}}">
                 @csrf
                   <input type="hidden" id="inventoryId" name="inventoryId">
+                  <input type="hidden" id="itemCategory" name="itemCategory">
                   <div class="mb-3">
                     <label class="form-label">Item Reorder Point</label>
                     <input type="text" class="form-control" id="itemReorder" name="itemReorder" required>
@@ -171,6 +175,7 @@ $(document).ready(function() {
     // Event listener for edit button clicks
     $(document).on('click', '.btn-success', function() {
         var inventoryId = $(this).data('id');
+        var itemCategory = $(this).data('category');
         var itemReorder = $(this).data('reorder');
         var itemInventory = $(this).data('inventory');
         var itemDescription = $(this).data('description');
@@ -181,6 +186,7 @@ $(document).ready(function() {
         var itemValue = $(this).data('value');
         // Set values in the modal form
         $('#inventoryId').val(inventoryId);
+        $('#itemCategory').val(itemCategory);
         $('#itemReorder').val(itemReorder);
         $('#itemInventory').val(itemInventory);
         $('#itemDescription').val(itemDescription);
@@ -243,8 +249,10 @@ $(document).ready(function() {
             }
         });
     
+        // Handle the delete button click event
         $(document).on('click', '.delete-button', function() {
             var id = $(this).data('id'); // Get the inventory ID
+            var category = $(this).data('category'); // Get the inventory category
     
             // SweetAlert confirmation
             Swal.fire({
@@ -257,8 +265,9 @@ $(document).ready(function() {
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
+                    // Make AJAX call to delete the inventory item
                     $.ajax({
-                        url: '/admin/dashboard/delete/' + id, // Your delete route
+                        url: '/admin/dashboard/delete/' + id + '/' + category, // Update URL to include category
                         type: 'DELETE',
                         success: function(response) {
                             Swal.fire(

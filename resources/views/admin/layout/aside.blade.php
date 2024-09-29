@@ -14,6 +14,16 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
+        <!-- Purchase Order -->
+        <li class="nav-item menu-open" style="margin-bottom: 10px;">
+          <a href="{{ route('admin.purchase') }}" class="nav-link {{ Route::is('admin.purchase') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-file-invoice"></i>
+            <p>
+              Purchase Order
+            </p>
+          </a>
+        </li>
+
         <!-- Item -->
         <li class="nav-item menu-open" style="margin-bottom: 10px;">
           <a href="{{ route('admin.category') }}" class="nav-link {{ Route::is('admin.category') ? 'active' : '' }}">
@@ -97,11 +107,21 @@
         </li>
 
         <!-- Accountable Forms -->
-        <li class="nav-item menu-open">
+        <li class="nav-item menu-open" style="margin-bottom: 10px;">
           <a href="{{ route('admin.accountable') }}" class="nav-link {{ Route::is('admin.accountable') ? 'active' : '' }}">
             <i class="nav-icon fas fa-file-invoice"></i>
             <p>
               Accountable Forms
+            </p>
+          </a>
+        </li>
+        
+        <!-- Purchase History -->
+        <li class="nav-item menu-open" style="margin-bottom: 10px;">
+          <a href="{{ route('admin.purchase-history') }}" class="nav-link {{ Route::is('admin.purchase-history') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-history"></i> <!-- Changed icon -->
+            <p>
+              Purchase History
             </p>
           </a>
         </li>
