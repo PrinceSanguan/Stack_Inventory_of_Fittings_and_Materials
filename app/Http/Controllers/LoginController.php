@@ -32,7 +32,7 @@ class LoginController extends Controller
 
             // Check user role and redirect accordingly
             if ($user->userRole === 'admin') {
-                return redirect()->route('admin.dashboard');
+                return redirect()->route('admin.purchase');
             }
         } else {
             return redirect()->route('welcome')->with(['error' => 'Invalid email or password']);

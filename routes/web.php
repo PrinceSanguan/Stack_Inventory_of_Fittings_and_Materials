@@ -30,10 +30,13 @@ Route::post('/admin/dashboard', [AdminController::class, 'updateCategory'])->nam
 Route::delete('/admin/dashboard/delete/{id}/{category}', [AdminController::class, 'deleteCategory'])->name('admin.delete-category');
 
 Route::get('/admin/purchase', [AdminController::class, 'purchase'])->name('admin.purchase');
+Route::post('/admin/purchase/get-descriptions', [AdminController::class, 'getDescriptions']);
+Route::post('/admin/purchase/get-item-details', [AdminController::class, 'getItemDetails']);
+
 Route::post('/admin/purchase', [AdminController::class, 'addPurchase'])->name('admin.add-purchase');
 
 Route::get('/admin/category', [AdminController::class, 'category'])->name('admin.category');
-Route::post('/admin/category', [AdminController::class, 'addCategory'])->name('admin.add-category');
+Route::post('/admin/category', [AdminController::class, 'addItem'])->name('admin.add-item');
 
 Route::get('/admin/connection', [AdminController::class, 'connection'])->name('admin.connection');
 

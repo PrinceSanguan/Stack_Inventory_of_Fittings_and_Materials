@@ -5,21 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Connection extends Model
+class Inventory extends Model
 {
-    use HasFactory;
 
     protected $fillable = [
+        'inventory_no',
         'category',
-        'reorder',
-        'inventory',
-        'description',
         'unit',
-        'balance',
+        'description',
+        'beginning_balance',
         'issuance',
-        'price',
-        'stock',
-        'value',
+        'quantity',
+        'unit_price',
+        'inventory_value'
     ];
 
 }

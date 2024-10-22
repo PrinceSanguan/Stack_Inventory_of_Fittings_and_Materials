@@ -34,16 +34,6 @@
           </a>
         </li>
 
-        <!-- All Category -->
-        <li class="nav-item menu-open" style="margin-bottom: 10px;">
-          <a href="{{ route('admin.dashboard') }}" class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-list"></i>
-            <p>
-              All Category
-            </p>
-          </a>
-        </li>
-
         <li class="nav-header" style="font-size: 1.2em; color: yellow;">CATEGORY</li>
 
         <!-- Service Connection -->

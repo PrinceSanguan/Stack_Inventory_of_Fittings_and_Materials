@@ -17,7 +17,7 @@
 </style>
 
                 <div class="col-sm-6 col-lg-12">
-                    <h1 class="m-0">Inventory List of Accountable Forms</h1>
+                    <h1 class="m-0">Purchase History</h1>
 
                     <!-- Print Button -->
                     <button id="printTable" class="btn btn-primary mb-3">Print Table</button>
@@ -37,14 +37,9 @@
                                     <th>Date</th> <!-- Added Date column -->
                                     <th>Category</th>
                                     <th>Reorder Point</th>
-                                    <th>Inventory No.</th>
                                     <th>Item Description</th>
-                                    <th>Unit</th>
-                                    <th>Beginning Balance</th>
-                                    <th>Issuances</th>
+                                    <th>quantity</th>
                                     <th>Unit Price</th>
-                                    <th>Quantity Stock</th>
-                                    <th>Inventory Value</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -53,14 +48,9 @@
                                     <td>{{ $purchase->created_at->format('Y-m-d') }}</td> <!-- Display the date -->
                                     <td>{{$purchase->category}}</td>
                                     <td>{{$purchase->reorder}}</td>
-                                    <td>{{$purchase->inventory}}</td>
                                     <td>{{$purchase->description}}</td>
-                                    <td>{{$purchase->unit}}</td>
-                                    <td>{{$purchase->balance}}</td>
-                                    <td>{{$purchase->issuance}}</td>
+                                    <td>{{$purchase->quantity}}</td>
                                     <td>{{$purchase->price}}</td>
-                                    <td>{{$purchase->stock}}</td>
-                                    <td>{{$purchase->value}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

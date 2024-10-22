@@ -14,28 +14,11 @@
             <form action="{{route('admin.add-purchase')}}" method="post" class="purchase-order-form">
               @csrf
 
-              <!-- Two-Column Layout for form fields -->
               <div class="row">
-                <!-- Left Column -->
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="po_number">Purchase Order No.</label>
-                    <input type="text" name="po_number" class="form-control" placeholder="Enter Purchase Order Number" required>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="supplier">Supplier Name</label>
-                    <input type="text" name="supplier" class="form-control" placeholder="Enter Supplier Name" required>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="date">Order Date</label>
-                    <input type="date" name="date" class="form-control" required>
-                  </div>
-
+                <div class="col-md-12">
                   <div class="form-group">
                     <label for="category">Order Category</label>
-                    <select name="category" class="form-control" required>
+                    <select name="category" id="category" class="form-control" required>
                       <option value="" disabled selected>Select Category</option>
                       <option value="connection">Service Connection</option>
                       <option value="repair">Repair and Maintenance</option>
@@ -48,48 +31,48 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="delivery_date">Expected Delivery Date</label>
-                    <input type="date" name="delivery_date" class="form-control" required>
-                  </div>
-                </div>
-
-                <!-- Right Column -->
-                <div class="col-md-6">
-                  <div class="form-group">
                     <label for="description">Item Description</label>
-                    <textarea name="description" class="form-control" placeholder="Enter item description" rows="3" required></textarea>
+                    <select name="description" id="description" class="form-control" required>
+                      <option value="" disabled selected>Select Description</option>
+                      <!-- Options will be populated dynamically -->
+                    </select>
+                  </div>
+                  
+                  <div class="form-group">
+                      <label for="quantity">Quantity</label>
+                      <input type="number" id="quantity" name="quantity" class="form-control" readonly>
                   </div>
 
                   <div class="form-group">
-                    <label for="quantity">Quantity</label>
-                    <input type="number" name="quantity" class="form-control" placeholder="Enter Quantity" required min="1">
+                    <label for="inventory_no">Inventory Number</label>
+                    <input type="number" id="inventory_no" name="inventory_no" class="form-control" readonly>
+                </div>
+                  
+                  <div class="form-group">
+                      <label for="unit">Unit</label>
+                      <input type="text" id="unit" name="unit" class="form-control" readonly>
                   </div>
 
                   <div class="form-group">
                     <label for="unit_price">Unit Price</label>
-                    <input type="number" name="unit_price" class="form-control" placeholder="Enter Unit Price" required min="0.01" step="0.01">
+                    <input type="number" id="unit_price" name="unit_price" class="form-control" readonly>
                   </div>
 
                   <div class="form-group">
-                    <label for="total_price">Total Price</label>
-                    <input type="number" name="total_price" class="form-control" placeholder="Enter Total Price" required min="0.01" step="0.01">
+                    <label for="issuance">Issuance</label>
+                    <input type="number" name="issuance" class="form-control" placeholder="Enter Issuance" required min="1">
                   </div>
 
-                  <div class="form-group">
-                    <label for="notes">Additional Notes</label>
-                    <textarea name="notes" class="form-control" placeholder="Enter any additional notes" rows="3"></textarea>
-                  </div>
                 </div>
               </div>
 
-              <!-- Submit Button with Icon -->
               <div class="text-center mt-4">
                 <button type="submit" class="btn btn-success btn-lg">
                   <i class="fas fa-paper-plane"></i> Submit Purchase Order
                 </button>
               </div>
-
             </form>
+
           </div>
         </div>
       </div>
@@ -99,29 +82,103 @@
 
 @include('admin.layout.footer')
 
-<!-- Confetti and SweetAlert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
 <script>
+  // Wait for document to be ready
+  $(document).ready(function() {
+      // Handle category change
+      $('#category').change(function() {
+          const category = $(this).val();
+          
+          // Reset description dropdown and form fields
+          $('#description').html('<option value="" disabled selected>Select Description</option>');
+          resetFormFields();
+          
+          // Fetch descriptions for selected category
+          $.ajax({
+              url: '/admin/purchase/get-descriptions',  // You'll need to define this route
+              method: 'POST',
+              data: {
+                  _token: $('meta[name="csrf-token"]').attr('content'),
+                  category: category
+              },
+              success: function(response) {
+                  let descriptionSelect = $('#description');
+                  
+                  response.forEach(function(item) {
+                      descriptionSelect.append(
+                          $('<option>', {
+                              value: item.description,
+                              text: item.description
+                          })
+                      );
+                  });
+              },
+              error: function(xhr) {
+                  console.error('Error fetching descriptions:', xhr);
+                  alert('Error fetching item descriptions. Please try again.');
+              }
+          });
+      });
+
+      // Handle description change
+      $('#description').change(function() {
+          const description = $(this).val();
+          const category = $('#category').val();
+          
+          // Fetch item details
+          $.ajax({
+              url: '/admin/purchase/get-item-details',  // You'll need to define this route
+              method: 'POST',
+              data: {
+                  _token: $('meta[name="csrf-token"]').attr('content'),
+                  category: category,
+                  description: description
+              },
+              success: function(response) {
+                  // Populate form fields
+                  $('#quantity').val(response.quantity);
+                  $('#inventory_no').val(response.inventory_no);
+                  $('#unit').val(response.unit);
+                  $('#unit_price').val(response.unit_price);
+                  
+                  // Enable quantity input
+                  $('input[name="quantity"]').prop('disabled', false);
+              },
+              error: function(xhr) {
+                  console.error('Error fetching item details:', xhr);
+                  alert('Error fetching item details. Please try again.');
+                  resetFormFields();
+              }
+          });
+      });
+
+      // Helper function to reset form fields
+      function resetFormFields() {
+          $('#stock').val('');
+          $('#inventory_no').val('');
+          $('#unit').val('');
+          $('#unit_price').val('');
+          $('input[name="quantity"]').val('').prop('disabled', true);
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
   document.addEventListener('DOMContentLoaded', function () {
-    // Handle Success with Confetti Effect
     @if (session('success'))
       Swal.fire({
         icon: 'success',
         title: 'Success!',
         text: '{{ session('success') }}',
         confirmButtonText: 'OK'
-      }).then(() => {
-        confetti({
-          particleCount: 150,
-          spread: 70,
-          origin: { y: 0.6 }
-        });
       });
     @endif
 
-    // Handle Error
     @if (session('error'))
       Swal.fire({
         icon: 'error',
@@ -133,5 +190,7 @@
   });
 </script>
 
+
 </body>
 </html>
+
