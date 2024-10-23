@@ -41,14 +41,14 @@
                             @foreach($inventorys as $index => $inventory)
                             <tr>
                                 <td>{{$inventory->reorder}}</td>
-                                <td>{{$inventory->inventory}}</td>
+                                <td>{{$inventory->inventory_no}}</td>
                                 <td>{{$inventory->description}}</td>
                                 <td>{{$inventory->unit}}</td>
-                                <td>{{$inventory->balance}}</td>
+                                <td>{{$inventory->beginning_balance}}</td>
                                 <td>{{$inventory->issuance}}</td>
-                                <td>{{$inventory->price}}</td>
-                                <td>{{$inventory->stock}}</td>
-                                <td>{{$inventory->value}}</td>
+                                <td>{{$inventory->unit_price}}</td>
+                                <td>{{$inventory->quantity}}</td>
+                                <td>{{$inventory->inventory_value}}</td>
                             @endforeach
                         </tbody>
                         <tfoot>
@@ -56,9 +56,9 @@
                                 <th colspan="4">TOTAL</th>
                                 <th>{{$totalBalance}}</th>
                                 <th>{{$totalIssuance}}</th>
-                                <th>{{$totalPrice}}</th>
-                                <th>{{$totalStock}}</th>
-                                <td>{{$totalValue}}</td>
+                                <th>₱{{$totalPrice}}</th>
+                                <th>{{$totalQuantity}}</th>
+                                <td>₱{{$totalInventoryValue}}</td>
                             </tr>
                         </tfoot>
                     </table>

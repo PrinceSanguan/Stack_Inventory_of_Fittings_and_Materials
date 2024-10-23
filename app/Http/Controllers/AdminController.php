@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Inventory;
+use App\Models\PurchaseHistory;
 
 class AdminController extends Controller
 {
@@ -100,6 +101,10 @@ class AdminController extends Controller
      {
          // Validate the request
          $validated = $request->validate([
+            'category' => 'required',
+            'description' => 'required',
+            'issuance' => 'required',
+            'unit_price' => 'required',
              'inventory_no' => 'required|exists:inventories,inventory_no',
              'issuance' => 'required|integer|min:1',
          ]);
@@ -117,11 +122,50 @@ class AdminController extends Controller
          // Update the inventory
          $inventory->update([
              'issuance' => $inventory->issuance + $request->issuance,
-             'beginning_balance' => $inventory->beginning_balance - $request->issuance,
+             'quantity' => $inventory->quantity - $request->issuance,
+         ]);
+
+         
+         // Check if the is below 10 and mark it for reorder if necessary
+        if ($inventory->quantity < 10) {
+            $inventory->update([
+                'reorder' => 'REORDER',
+            ]);
+        }
+
+         // add Purchase History
+         PurchaseHistory::create([
+            'category' => $validated['category'],
+            'description' => $validated['description'],
+            'issuance' => $validated['issuance'],
+            'unit_price' => $validated['unit_price']
          ]);
      
          return redirect()->back()
              ->with('success', 'Purchase order created successfully!');
      }
+
+     public function purchaseHistory() 
+     {
+        $purchases = PurchaseHistory::all();
+
+        return view ('admin.purchase-history', compact('purchases'));
+     }
+
+     public function connection()
+    {
+        // Retrieve all items in the "connection" category
+        $inventorys = Inventory::Where('category', 'connection')->get();
+
+        // Calculate the total sums for the relevant fields
+        $totalBalance = Inventory::Where('category', 'connection')->sum('beginning_balance');
+        $totalIssuance = Inventory::Where('category', 'connection')->sum('issuance');
+        $totalPrice = Inventory::Where('category', 'connection')->sum('unit_price');
+        $totalQuantity = Inventory::Where('category', 'connection')->sum('quantity');
+        $totalInventoryValue = Inventory::Where('category', 'connection')->sum('inventory_value');
+
+        // Pass the calculated sums and the inventory list to the view
+        return view('admin.connection', compact('inventorys', 'totalBalance', 'totalIssuance', 'totalPrice', 'totalQuantity', 'totalInventoryValue'));
+    }
 
 }

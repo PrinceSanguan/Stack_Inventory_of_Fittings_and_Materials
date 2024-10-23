@@ -36,21 +36,19 @@
                                 <tr>
                                     <th>Date</th> <!-- Added Date column -->
                                     <th>Category</th>
-                                    <th>Reorder Point</th>
                                     <th>Item Description</th>
-                                    <th>quantity</th>
+                                    <th>Issuance</th>
                                     <th>Unit Price</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($purchases as $index => $purchase)
                                 <tr>
-                                    <td>{{ $purchase->created_at->format('Y-m-d') }}</td> <!-- Display the date -->
+                                    <td>{{ \Carbon\Carbon::parse($purchase->created_at)->format('F d, Y') }}</td>
                                     <td>{{$purchase->category}}</td>
-                                    <td>{{$purchase->reorder}}</td>
                                     <td>{{$purchase->description}}</td>
-                                    <td>{{$purchase->quantity}}</td>
-                                    <td>{{$purchase->price}}</td>
+                                    <td>{{$purchase->issuance}}</td>
+                                    <td>₱{{$purchase->unit_price}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('inventories', function (Blueprint $table) {
             $table->id();
+            $table->string('reorder')->nullable();
             $table->string('inventory_no')->nullable()->unique()->index(); // Unique inventory number
             $table->string('category');
             $table->string('unit'); // pcs, box, each
