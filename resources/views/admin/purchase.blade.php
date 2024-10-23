@@ -11,67 +11,68 @@
           <div class="card shadow-lg p-4">
             <h1 class="text-center mb-4 text-primary">Create Purchase Order</h1>
 
-            <form action="{{route('admin.add-purchase')}}" method="post" class="purchase-order-form">
+            <form action="{{ route('admin.add-purchase') }}" method="post" class="purchase-order-form">
               @csrf
-
+          
               <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label for="category">Order Category</label>
-                    <select name="category" id="category" class="form-control" required>
-                      <option value="" disabled selected>Select Category</option>
-                      <option value="connection">Service Connection</option>
-                      <option value="repair">Repair and Maintenance</option>
-                      <option value="subsidy">30M NG Subsidy Project</option>
-                      <option value="donation">Donation</option>
-                      <option value="maintenance">Gen. Set</option>
-                      <option value="mswd">MSWD Inventory</option>
-                      <option value="accountable">Accountable Forms</option>
-                    </select>
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="category">Order Category</label>
+                          <select name="category" id="category" class="form-control" required>
+                              <option value="" disabled selected>Select Category</option>
+                              <option value="connection">Service Connection</option>
+                              <option value="repair">Repair and Maintenance</option>
+                              <option value="subsidy">30M NG Subsidy Project</option>
+                              <option value="donation">Donation</option>
+                              <option value="maintenance">Gen. Set</option>
+                              <option value="mswd">MSWD Inventory</option>
+                              <option value="accountable">Accountable Forms</option>
+                          </select>
+                      </div>
+          
+                      <div class="form-group">
+                          <label for="description">Item Description</label>
+                          <select name="description" id="description" class="form-control" required>
+                              <option value="" disabled selected>Select Description</option>
+                              <!-- Options will be populated dynamically -->
+                          </select>
+                      </div>
+          
+                      <div class="form-group">
+                          <label for="quantity">Quantity</label>
+                          <input type="number" id="quantity" name="quantity" class="form-control" readonly>
+                      </div>
+          
+                      <div class="form-group">
+                          <label for="inventory_no">Inventory Number</label>
+                          <input type="number" id="inventory_no" name="inventory_no" class="form-control" readonly>
+                      </div>
                   </div>
-
-                  <div class="form-group">
-                    <label for="description">Item Description</label>
-                    <select name="description" id="description" class="form-control" required>
-                      <option value="" disabled selected>Select Description</option>
-                      <!-- Options will be populated dynamically -->
-                    </select>
+          
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="unit">Unit</label>
+                          <input type="text" id="unit" name="unit" class="form-control" readonly>
+                      </div>
+          
+                      <div class="form-group">
+                          <label for="unit_price">Unit Price</label>
+                          <input type="number" id="unit_price" name="unit_price" class="form-control" readonly>
+                      </div>
+          
+                      <div class="form-group">
+                          <label for="issuance">Issuance</label>
+                          <input type="number" name="issuance" class="form-control" placeholder="Enter Issuance" required min="1">
+                      </div>
                   </div>
-                  
-                  <div class="form-group">
-                      <label for="quantity">Quantity</label>
-                      <input type="number" id="quantity" name="quantity" class="form-control" readonly>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="inventory_no">Inventory Number</label>
-                    <input type="number" id="inventory_no" name="inventory_no" class="form-control" readonly>
-                </div>
-                  
-                  <div class="form-group">
-                      <label for="unit">Unit</label>
-                      <input type="text" id="unit" name="unit" class="form-control" readonly>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="unit_price">Unit Price</label>
-                    <input type="number" id="unit_price" name="unit_price" class="form-control" readonly>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="issuance">Issuance</label>
-                    <input type="number" name="issuance" class="form-control" placeholder="Enter Issuance" required min="1">
-                  </div>
-
-                </div>
               </div>
-
+          
               <div class="text-center mt-4">
-                <button type="submit" class="btn btn-success btn-lg">
-                  <i class="fas fa-paper-plane"></i> Submit Purchase Order
-                </button>
+                  <button type="submit" class="btn btn-success btn-lg">
+                      <i class="fas fa-paper-plane"></i> Submit Purchase Order
+                  </button>
               </div>
-            </form>
+          </form>
 
           </div>
         </div>

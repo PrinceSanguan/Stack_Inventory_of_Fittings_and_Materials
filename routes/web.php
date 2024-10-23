@@ -26,8 +26,6 @@ Route::post('/', [LoginController::class, 'loginForm'])->name('login.form');
 Route::middleware(['auth'])->group(function () {
 /// Admin Contoller ///
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-Route::post('/admin/dashboard', [AdminController::class, 'updateCategory'])->name('admin.update-category');
-Route::delete('/admin/dashboard/delete/{id}/{category}', [AdminController::class, 'deleteCategory'])->name('admin.delete-category');
 
 Route::get('/admin/purchase', [AdminController::class, 'purchase'])->name('admin.purchase');
 Route::post('/admin/purchase/get-descriptions', [AdminController::class, 'getDescriptions']);
@@ -39,19 +37,12 @@ Route::get('/admin/category', [AdminController::class, 'category'])->name('admin
 Route::post('/admin/category', [AdminController::class, 'addItem'])->name('admin.add-item');
 
 Route::get('/admin/connection', [AdminController::class, 'connection'])->name('admin.connection');
-
 Route::get('/admin/repair', [AdminController::class, 'repair'])->name('admin.repair');
-
 Route::get('/admin/subsidy', [AdminController::class, 'subsidy'])->name('admin.subsidy');
-
 Route::get('/admin/donation', [AdminController::class, 'donation'])->name('admin.donation');
-
 Route::get('/admin/maintenance', [AdminController::class, 'maintenance'])->name('admin.maintenance');
-
 Route::get('/admin/mswd', [AdminController::class, 'mswd'])->name('admin.mswd');
-
 Route::get('/admin/accountable', [AdminController::class, 'accountable'])->name('admin.accountable');
-
 Route::get('/admin/purchase-history', [AdminController::class, 'purchaseHistory'])->name('admin.purchase-history');
 });
 

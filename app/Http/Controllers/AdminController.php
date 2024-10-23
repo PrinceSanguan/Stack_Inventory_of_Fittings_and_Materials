@@ -152,7 +152,7 @@ class AdminController extends Controller
         return view ('admin.purchase-history', compact('purchases'));
      }
 
-     public function connection()
+    public function connection()
     {
         // Retrieve all items in the "connection" category
         $inventorys = Inventory::Where('category', 'connection')->get();
@@ -166,6 +166,102 @@ class AdminController extends Controller
 
         // Pass the calculated sums and the inventory list to the view
         return view('admin.connection', compact('inventorys', 'totalBalance', 'totalIssuance', 'totalPrice', 'totalQuantity', 'totalInventoryValue'));
+    }
+
+    public function repair()
+    {
+        // Retrieve all items in the "repair" category
+        $inventorys = Inventory::Where('category', 'repair')->get();
+
+        // Calculate the total sums for the relevant fields
+        $totalBalance = Inventory::Where('category', 'repair')->sum('beginning_balance');
+        $totalIssuance = Inventory::Where('category', 'repair')->sum('issuance');
+        $totalPrice = Inventory::Where('category', 'repair')->sum('unit_price');
+        $totalQuantity = Inventory::Where('category', 'repair')->sum('quantity');
+        $totalInventoryValue = Inventory::Where('category', 'repair')->sum('inventory_value');
+
+        // Pass the calculated sums and the inventory list to the view
+        return view('admin.repair', compact('inventorys', 'totalBalance', 'totalIssuance', 'totalPrice', 'totalQuantity', 'totalInventoryValue'));
+    }
+
+    public function subsidy()
+    {
+        // Retrieve all items in the "subsidy" category
+        $inventorys = Inventory::Where('category', 'subsidy')->get();
+
+        // Calculate the total sums for the relevant fields
+        $totalBalance = Inventory::Where('category', 'subsidy')->sum('beginning_balance');
+        $totalIssuance = Inventory::Where('category', 'subsidy')->sum('issuance');
+        $totalPrice = Inventory::Where('category', 'subsidy')->sum('unit_price');
+        $totalQuantity = Inventory::Where('category', 'subsidy')->sum('quantity');
+        $totalInventoryValue = Inventory::Where('category', 'subsidy')->sum('inventory_value');
+
+        // Pass the calculated sums and the inventory list to the view
+        return view('admin.subsidy', compact('inventorys', 'totalBalance', 'totalIssuance', 'totalPrice', 'totalQuantity', 'totalInventoryValue'));
+    }
+
+    public function donation()
+    {
+        // Retrieve all items in the "donation" category
+        $inventorys = Inventory::Where('category', 'donation')->get();
+
+        // Calculate the total sums for the relevant fields
+        $totalBalance = Inventory::Where('category', 'donation')->sum('beginning_balance');
+        $totalIssuance = Inventory::Where('category', 'donation')->sum('issuance');
+        $totalPrice = Inventory::Where('category', 'donation')->sum('unit_price');
+        $totalQuantity = Inventory::Where('category', 'donation')->sum('quantity');
+        $totalInventoryValue = Inventory::Where('category', 'donation')->sum('inventory_value');
+
+        // Pass the calculated sums and the inventory list to the view
+        return view('admin.donation', compact('inventorys', 'totalBalance', 'totalIssuance', 'totalPrice', 'totalQuantity', 'totalInventoryValue'));
+    }
+
+    public function maintenance()
+    {
+        // Retrieve all items in the "maintenance" category
+        $inventorys = Inventory::Where('category', 'maintenance')->get();
+
+        // Calculate the total sums for the relevant fields
+        $totalBalance = Inventory::Where('category', 'maintenance')->sum('beginning_balance');
+        $totalIssuance = Inventory::Where('category', 'maintenance')->sum('issuance');
+        $totalPrice = Inventory::Where('category', 'maintenance')->sum('unit_price');
+        $totalQuantity = Inventory::Where('category', 'maintenance')->sum('quantity');
+        $totalInventoryValue = Inventory::Where('category', 'maintenance')->sum('inventory_value');
+
+        // Pass the calculated sums and the inventory list to the view
+        return view('admin.maintenance', compact('inventorys', 'totalBalance', 'totalIssuance', 'totalPrice', 'totalQuantity', 'totalInventoryValue'));
+    }
+
+    public function mswd()
+    {
+        // Retrieve all items in the "mswd" category
+        $inventorys = Inventory::Where('category', 'mswd')->get();
+
+        // Calculate the total sums for the relevant fields
+        $totalBalance = Inventory::Where('category', 'mswd')->sum('beginning_balance');
+        $totalIssuance = Inventory::Where('category', 'mswd')->sum('issuance');
+        $totalPrice = Inventory::Where('category', 'mswd')->sum('unit_price');
+        $totalQuantity = Inventory::Where('category', 'mswd')->sum('quantity');
+        $totalInventoryValue = Inventory::Where('category', 'mswd')->sum('inventory_value');
+
+        // Pass the calculated sums and the inventory list to the view
+        return view('admin.mswd', compact('inventorys', 'totalBalance', 'totalIssuance', 'totalPrice', 'totalQuantity', 'totalInventoryValue'));
+    }
+
+    public function accountable()
+    {
+        // Retrieve all items in the "accountable" category
+        $inventorys = Inventory::Where('category', 'accountable')->get();
+
+        // Calculate the total sums for the relevant fields
+        $totalBalance = Inventory::Where('category', 'accountable')->sum('beginning_balance');
+        $totalIssuance = Inventory::Where('category', 'accountable')->sum('issuance');
+        $totalPrice = Inventory::Where('category', 'accountable')->sum('unit_price');
+        $totalQuantity = Inventory::Where('category', 'accountable')->sum('quantity');
+        $totalInventoryValue = Inventory::Where('category', 'accountable')->sum('inventory_value');
+
+        // Pass the calculated sums and the inventory list to the view
+        return view('admin.accountable', compact('inventorys', 'totalBalance', 'totalIssuance', 'totalPrice', 'totalQuantity', 'totalInventoryValue'));
     }
 
 }
