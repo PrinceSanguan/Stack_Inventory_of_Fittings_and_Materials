@@ -8,17 +8,58 @@
 <!----------------------------------------Start Content here------------------------------------------>
 
 <style>
-    /* Hide action column during print */
+    /* Print styles */
     @media print {
         .no-print {
             display: none !important;
         }
+
+        .header-container {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: center !important;
+            width: 100% !important;
+            page-break-inside: avoid !important;
+        }
+
+        .header-container h2 {
+            display: inline-block !important;
+            margin: 0 !important;
+            padding-right: 30px !important;
+        }
+
+        .header-container img {
+            display: inline-block !important;
+            height: 50px !important;
+            vertical-align: middle !important;
+            margin-bottom: 100px !important;
+        }
+
+        h1, h3 {
+            text-align: center !important;
+            margin-bottom: 10px !important;
+        }
     }
+
+    /* Normal display styles */
+    .header-container {
+        display: flex;
+        align-items: center; /* Aligns items vertically centered */
+    }
+
+    .header-container img {
+        display: none; /* Optional: add some space between the text and image */
+    }
+
 </style>
 
             <div class="col-sm-6 col-lg-12">
-                <h1 class="m-0">Inventory List of Fitting Materials from 30M NG Subsidy Project</h1>
-
+                <h1>METRO SIARGAO WATER DISTRICT</h1>
+                <h3>Dapa, Surigao Del Norte</h3>
+                <div class="header-container"><h1 class="m-0">
+                    <h2 class="m-0">Inventory List of Fitting Materials from 30M NG Subsidy Project</h2>
+                    <img src="{{asset('images/sijm.jpg')}}" alt="" style="height: 50px; ">
+                </div>
                 <!-- Print Button -->
                 <button id="printTable" class="btn btn-primary mb-3">Print Table</button>
 
@@ -104,22 +145,82 @@
 
 <script>
     document.getElementById('printTable').addEventListener('click', function() {
-        var title = document.querySelector('h1').outerHTML; // Get the H1 title
-        var table = document.getElementById('inventoryTable').outerHTML; // Get the table HTML
-        var printContents = title + table; // Combine the title and table
-  
-        var originalContents = document.body.innerHTML;
-    
-        // Replace the body content with the title and table for printing
-        document.body.innerHTML = printContents;
-    
-        window.print();
-    
-        // Restore original body content
-        document.body.innerHTML = originalContents;
-        window.location.reload(); // Optional: Reload the page to restore the state
+        // Create a new window for printing
+        var printWindow = window.open('', '_blank');
+        
+        // Get the content
+        var title1 = document.querySelector('h1').outerHTML;
+        var content = document.querySelector('h3').outerHTML;
+        var headerContainer = document.querySelector('.header-container').outerHTML;
+        var table = document.getElementById('inventoryTable').outerHTML;
+        
+        // Combine all styles
+        var styles = `
+            <style>
+                @media print {
+                    .header-container {
+                        display: flex !important;
+                        flex-direction: row !important;
+                        align-items: center !important;
+                        width: 100% !important;
+                        page-break-inside: avoid !important;
+                    }
+                    .header-container h2 {
+                        display: inline-block !important;
+                        margin: 0 !important;
+                        padding-right: 20px !important;
+                    }
+                    .header-container img {
+                        display: inline-block !important;
+                        height: 50px !important;
+                        vertical-align: middle !important;
+                        margin-bottom: 10px !important;
+                    }
+                    h1, h3 {
+                        text-align: center !important;
+                        margin-bottom: 10px !important;
+                    }
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                    }
+                    th, td {
+                        border: 1px solid black;
+                        padding: 8px;
+                        text-align: left;
+                    }
+                }
+            </style>
+        `;
+        
+        // Combine everything
+        var printContent = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                ${styles}
+            </head>
+            <body>
+                ${title1}
+                ${content}
+                ${headerContainer}
+                ${table}
+            </body>
+            </html>
+        `;
+        
+        // Write to the new window and print
+        printWindow.document.write(printContent);
+        printWindow.document.close();
+        
+        // Wait for images to load before printing
+        printWindow.onload = function() {
+            printWindow.print();
+            printWindow.close();
+        };
     });
-  </script>
+</script>
 
 </body>
 </html>
+
