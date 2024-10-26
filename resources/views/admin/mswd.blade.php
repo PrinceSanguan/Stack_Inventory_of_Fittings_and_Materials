@@ -48,7 +48,7 @@
                                 <td>{{$inventory->issuance}}</td>
                                 <td>{{$inventory->unit_price}}</td>
                                 <td>{{$inventory->quantity}}</td>
-                                <td>{{$inventory->inventory_value}}</td>
+                                <td>₱{{ number_format($inventory->quantity * $inventory->unit_price, 2) }}</td>
                             @endforeach
                         </tbody>
                         <tfoot>
@@ -58,7 +58,7 @@
                                 <th>{{$totalIssuance}}</th>
                                 <th>₱{{$totalPrice}}</th>
                                 <th>{{$totalQuantity}}</th>
-                                <td>₱{{$totalInventoryValue}}</td>
+                                <td>₱{{ number_format($totalInventoryValue, 2) }}</td>
                             </tr>
                         </tfoot>
                     </table>
